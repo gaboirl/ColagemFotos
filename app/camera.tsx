@@ -1,4 +1,4 @@
-// app/camera.tsx (Corrigido)
+// app/camera.tsx
 import React, { useRef } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, Alert, Button } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
@@ -46,11 +46,13 @@ export default function CameraScreen() {
 
   return (
     <View style={styles.container}>
-      <CameraView style={styles.camera} facing="back" ref={cameraRef}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.captureButton} onPress={takePicture} />
-        </View>
-      </CameraView>
+      {/* 1. A Câmera agora preenche o container */}
+      <CameraView style={StyleSheet.absoluteFill} facing="back" ref={cameraRef} />
+
+      {/* 2. O botão fica em uma View separada por cima */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.captureButton} onPress={takePicture} />
+      </View>
     </View>
   );
 }
@@ -59,12 +61,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  camera: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
+  // O estilo 'camera' foi removido
   buttonContainer: {
+    flex: 1, // Faz o container de botões preencher a tela
+    justifyContent: 'flex-end', // Joga o conteúdo para o final (baixo)
+    alignItems: 'center', // Centraliza o botão
+    backgroundColor: 'transparent', // Garante que esta View seja transparente
     marginBottom: 50,
   },
   captureButton: {
@@ -75,7 +77,6 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderColor: '#ccc',
   },
-  // Estilo para o container do botão de permissão
   permissionContainer: {
     flex: 1,
     justifyContent: 'center',
