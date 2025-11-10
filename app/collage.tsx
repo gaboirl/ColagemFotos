@@ -73,8 +73,8 @@ export default function CollageScreen() {
     // Copia o ref para uma variável local
     const ref = viewShotRef.current;
 
-    // Verifica se o ref é nulo ANTES de tentar usá-lo
-    if (ref === null) {
+    // Verifica se o ref existe E se tem a função .capture
+    if (!ref?.capture) {
       Alert.alert('Erro', 'Não foi possível capturar a imagem. Tente novamente.');
       setModalVisible(false);
       return;
